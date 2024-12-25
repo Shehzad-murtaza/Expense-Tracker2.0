@@ -48,15 +48,23 @@ const Home: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-teal-400 via-blue-500 to-indigo-600 text-gray-200">
-      <div className="w-full max-w-md p-6 bg-gradient-to-br from-indigo-500 to-blue-600 shadow-2xl rounded-xl">
-        <h1 className="text-4xl font-bold text-center mb-6 text-white">Expense Tracker</h1>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-gray-300">
+      <div className="w-full max-w-md p-6 bg-gray-800 shadow-xl rounded-lg">
+        <h1 className="text-4xl font-bold text-center mb-6 text-gray-200">
+          Expense Tracker
+        </h1>
         {/* Balance Section */}
         <div className="mb-6 text-center">
-          <h2 className="text-3xl font-semibold text-white">Balance: ${balance}</h2>
+          <h2 className="text-3xl font-semibold text-gray-200">
+            Balance: ${balance}
+          </h2>
           <div className="flex justify-between mt-3 text-lg">
-            <span className="text-green-400 font-medium">Income: ${totalIncome}</span>
-            <span className="text-red-400 font-medium">Expense: ${totalExpense}</span>
+            <span className="text-green-400 font-medium">
+              Income: ${totalIncome}
+            </span>
+            <span className="text-red-400 font-medium">
+              Expense: ${totalExpense}
+            </span>
           </div>
         </div>
         {/* Add Transaction Form */}
@@ -90,54 +98,41 @@ const TransactionForm: React.FC<{
     setAmount("");
   };
 
-  const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = Number(e.target.value);
-    if (value === 0) {
-      setAmount("");
-    } else {
-      setAmount(value);
-    }
-  };
-
   return (
     <form onSubmit={handleSubmit} className="mb-6">
       <div className="mb-4">
-        <label className="block mb-2 text-sm text-gray-300">Type</label>
+        <label className="block mb-2 text-sm text-gray-400">Type</label>
         <select
           value={type}
           onChange={(e) => setType(e.target.value)}
-          className="w-full border border-gray-700 bg-gray-800 text-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          className="w-full border border-gray-600 bg-gray-700 text-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500"
         >
           <option value="Income">Income</option>
           <option value="Expense">Expense</option>
         </select>
       </div>
       <div className="mb-4">
-        <label className="block mb-2 text-sm text-gray-300">Description</label>
+        <label className="block mb-2 text-sm text-gray-400">Description</label>
         <input
           type="text"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          className="w-full border border-gray-700 bg-gray-800 text-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          className="w-full border border-gray-600 bg-gray-700 text-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500"
         />
       </div>
       <div className="mb-4">
-        <label className="block mb-2 text-sm text-gray-300">Amount</label>
+        <label className="block mb-2 text-sm text-gray-400">Amount</label>
         <input
           type="number"
           value={amount}
-          onChange={handleAmountChange}
-          className="w-full border border-gray-700 bg-gray-800 text-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          onChange={(e) => setAmount(Number(e.target.value))}
+          className="w-full border border-gray-600 bg-gray-700 text-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500"
         />
       </div>
-      {error && (
-        <div className="mb-4 text-red-500 text-sm">
-          {error}
-        </div>
-      )}
+      {error && <div className="mb-4 text-red-500 text-sm">{error}</div>}
       <button
         type="submit"
-        className="w-full bg-gradient-to-r from-green-500 to-blue-500 text-white rounded-lg py-2 shadow-lg hover:from-green-600 hover:to-blue-600 transition duration-300"
+        className="w-full bg-gradient-to-r from-teal-500 to-blue-500 text-white rounded-lg py-2 shadow-md hover:from-teal-600 hover:to-blue-600 transition duration-300"
       >
         Add Transaction
       </button>
@@ -150,12 +145,12 @@ const TransactionList: React.FC<{
   handleDelete: (id: number) => void;
 }> = ({ transactions, handleDelete }) => (
   <div>
-    <h2 className="text-xl font-semibold mb-4 text-gray-300">Transaction History</h2>
+    <h2 className="text-xl font-semibold mb-4 text-gray-200">Transaction History</h2>
     <ul className="space-y-3">
       {transactions.map((txn) => (
         <li
           key={txn.id}
-          className="p-3 border border-gray-700 bg-gray-800 text-gray-300 rounded-lg flex justify-between items-center shadow-md hover:shadow-xl transition duration-300"
+          className="p-3 border border-gray-600 bg-gray-700 text-gray-300 rounded-lg flex justify-between items-center shadow-md hover:shadow-xl transition duration-300"
         >
           <span>{txn.description}</span>
           <span
@@ -167,7 +162,7 @@ const TransactionList: React.FC<{
           </span>
           <button
             onClick={() => handleDelete(txn.id)}
-            className="text-red-500 hover:text-red-700 transition"
+            className="text-red-400 hover:text-red-500 transition"
           >
             ❌
           </button>
